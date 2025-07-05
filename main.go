@@ -1,15 +1,16 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"log"
 	"os"
+	"strings"
 	"unicode"
 )
 
 func main() {
-
 	// read the args
 	if len(os.Args) < 2 {
 		log.Fatal("Not enough args")
@@ -26,24 +27,28 @@ func main() {
 
 	// count the number of occurrences
 	count := 0
-	curr := ""
+	var sb strings.Builder
+	sb.Grow(32)
 
 	b := make([]byte, 1)
+	r := bufio.NewReader(f)
 	for {
-		_, err := f.Read(b)
-		if err == io.EOF {
-			break
-		}
+		_, err := r.Read(b)
 		if err != nil {
+			if err == io.EOF {
+				break
+			}
 			log.Fatal(err)
 		}
+
 		if unicode.IsLetter(rune(b[0])) {
-			curr += string(b)
+			sb.Write(b)
 		} else {
-			if curr == word {
+			if sb.String() == word {
 				count++
 			}
-			curr = ""
+			sb.Reset()
+			sb.Grow(32)
 		}
 	}
 

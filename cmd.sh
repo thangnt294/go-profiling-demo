@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -wo love test.txt | wc -l
+grep -wo love moby.txt | wc -l
