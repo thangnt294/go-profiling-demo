@@ -49,13 +49,17 @@ func main() {
 		}
 	}
 
+	if sb.Len() > 0 && sb.String() == word {
+		count++
+	}
+
 	fmt.Println(count)
 }
 
 // -----------------------------------------------------------------------------------------------------------
 
 // func main() {
-// 	defer profile.Start(profile.MemProfile, profile.ProfilePath(".")).Stop()
+// 	// defer profile.Start(profile.MemProfile, profile.ProfilePath(".")).Stop()
 
 // 	// read the args
 // 	if len(os.Args) < 2 {
@@ -94,6 +98,10 @@ func main() {
 // 			}
 // 			sb.Reset()
 // 		}
+// 	}
+
+// 	if sb.Len() > 0 && sb.String() == word {
+// 		count++
 // 	}
 
 // 	fmt.Println(count)
@@ -143,6 +151,10 @@ func main() {
 // 			sb.Reset()
 // 			sb.Grow(32)
 // 		}
+// 	}
+
+// 	if sb.Len() > 0 && sb.String() == word {
+// 		count++
 // 	}
 
 // 	fmt.Println(count)
